@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>God's Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #FFD700, #FF7F50, #FF4500);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    h1 {
+      font-size: 28px;
+      color: #00CED1;
+      margin-top: 15px;
+    }
+    .btn {
+      background-color: #1DA1F2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      width: 100%;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .admin-panel {
+      display: none;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+    .image-viewer {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+    .language-select {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <select class="language-select" id="language" onchange="setLanguage()">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+    </select>
+    <img src="https://i.imgur.com/K2E14MJ.jpeg" class="logo" alt="Logo">
+    <h1 id="portalTitle">God's Portal</h1>
+    <button class="btn" onclick="window.open('https://instagram.com/leafxb4n','_blank')">Instagram</button>
+    <button class="btn" onclick="window.open('https://t.me/godxr4m','_blank')">Telegram</button>
+    <div id="loginSection">
+      <input type="text" id="username" class="input-field" placeholder="Username">
+      <input type="password" id="password" class="input-field" placeholder="Password">
+      <button class="btn" onclick="login()" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)">Log In</button>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+      <button class="btn" onclick="showImage('aadhar')" id="aadharBtn">Aadhar Card</button>
+      <button class="btn" onclick="showImage('results')" id="resultsBtn">Results</button>
+      <button class="btn" onclick="hideImageViewer()" id="moreBtn">More</button>
+    </div>
+    <div class="image-viewer" id="imageViewer">
+      <img id="displayImage" src="" alt="Selected Content" style="max-width: 100%; margin-top: 20px; border-radius: 8px;">
+      <a id="downloadBtn" class="btn" download href="#">Download</a>
+    </div>
+  </div>
+  <script>
+    const imageSources = {
+      aadhar: "https://i.imgur.com/A8WsoeC.jpeg",
+      results: "https://i.imgur.com/idWGStK.png"
+    };
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if (user === "leafxban" && pass === "GodxRam") {
+        document.getElementById("adminPanel").style.display = "flex";
+        document.getElementById("loginSection").style.display = "none";
+      } else {
+        alert("Invalid credentials");
+      }
+    }
+    function showImage(type) {
+      const viewer = document.getElementById("imageViewer");
+      const img = document.getElementById("displayImage");
+      const download = document.getElementById("downloadBtn");
+      if (imageSources[type]) {
+        img.src = imageSources[type];
+        download.href = imageSources[type];
+        viewer.style.display = "flex";
+      }
+    }
+    function hideImageViewer() {
+      document.getElementById("imageViewer").style.display = "none";
+    }
+    function setLanguage() {
+      const lang = document.getElementById("language").value;
+      const portalTitle = document.getElementById("portalTitle");
+      const aadharBtn = document.getElementById("aadharBtn");
+      const resultsBtn = document.getElementById("resultsBtn");
+      const moreBtn = document.getElementById("moreBtn");
+      if (lang === "hi") {
+        portalTitle.innerText = "गॉड्स पोर्टल";
+        aadharBtn.innerText = "आधार कार्ड";
+        resultsBtn.innerText = "परिणाम";
+        moreBtn.innerText = "और विकल्प";
+      } else {
+        portalTitle.innerText = "God's Portal";
+        aadharBtn.innerText = "Aadhar Card";
+        resultsBtn.innerText = "Results";
+        moreBtn.innerText = "More";
+      }
+    }
+  </script>
+</body>
+</html>
